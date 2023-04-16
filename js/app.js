@@ -54,12 +54,30 @@ const { createApp } = Vue
 //   `
 // }).mount('#app')
 
-createApp({
+const vm = createApp({
   data() {
     return {
       username: '',
       message: 'Accede a tu cuenta',
-      open: false
+      open: false,
+      posts: [
+        {
+          title: 'Titulo 1',
+          description: 'Lorem ipsum...'
+        },
+        {
+          title: 'Titulo 2',
+          description: 'Lorem ipsum...'
+        },
+        {
+          title: 'Titulo 3',
+          description: 'Lorem ipsum...'
+        },
+        {
+          title: 'Titulo 4',
+          description: 'Lorem ipsum...'
+        }
+      ]
     }
   },
   watch: {
@@ -80,14 +98,26 @@ createApp({
       return this.open ? 'open' : 'closed';
     }
   },
+  methods: {
+    deletePost(index) {
+      this.posts.splice(index, 1);
+    }
+  },
   template: `
     <div class="container" :class="styles">
       <h2>{{ message }}</h2>
       <div v-if="open">
         <p>Hola, {{ username }}</p>
+        <div class="list">
+          <div v-for="(item, i) in posts" :key="i" class="item">
+            <div class="title">{{ item.title }}</div>
+            <p>{{ item.description }}</p>
+            <button class="delete" @click="deletePost(i)">Eliminar</button>
+          </div>
+        </div>
       </div>
       <div v-else>
-        <label>Username: </label>
+        <div>Username</div>
         <input type="text" v-model="username"/>
       </div>
       <button @click="open = !open">
