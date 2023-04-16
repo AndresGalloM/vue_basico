@@ -5,5 +5,6 @@ createApp({
     return {
       message: 'Hello Vue!'
     }
-  }
+  },
+  template: `<div v-text="message"></div>`
 }).mount('#app')
