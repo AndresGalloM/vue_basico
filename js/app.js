@@ -11,14 +11,30 @@ createApp({
     }
   },
   methods: {
-    submit(event) {
-      this.count ++;
-    }
+    // submit(event) {
+    //   this.count ++;
+    // }
+    // increment() {
+    //   this.count ++;
+    // },
+
+    // decrement() {
+    //   this.count --;
+    // }
   },
   // template: `<img v-bind:[attr]="img"></img>`
+  // template: `
+  //   <form v-on:[evt].prevent="submit">
+  //     <button>{{ count }}</button>
+  //   </form>
+  // `
+  // template: `
+  //   <p>Contador: {{ count }}</p>
+  //   <button v-on:click="increment"> + </button>
+  //   <button v-on:click="decrement"> - </button>
+  // `
   template: `
-    <form v-on:[evt].prevent="submit">
-      <button>{{ count }}</button>
-    </form>
+    <p> {{ message }} </p>
+    <input type="text" v-model="message"/>
   `
 }).mount('#app')
