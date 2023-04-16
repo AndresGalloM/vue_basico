@@ -1,55 +1,89 @@
 const { createApp } = Vue
 
-const vm = createApp({
+// const vm = createApp({
+//   data() {
+//     return {
+//       firstName: 'Andres',
+//       lastName: 'Gallo',
+//       message: 'Hello Vue!',
+//       attr: 'src',
+//       img: 'https://fastly.picsum.photos/id/363/200/300.jpg?hmac=LvonEMeE2QnwxULuBZW5xHtdjkz844GnAPpEhDwGvMY',
+//       count: 0,
+//       evt: 'submit'
+//     }
+//   },
+//   computed: {
+//     fullName() {
+//       return `${this.firstName} ${this.lastName}`
+//     }
+//   },
+//   watch: {
+//     message(newValue, oldValue) {
+//       console.log('Watcher activado', newValue, oldValue)
+//     }
+//   },
+//   methods: {
+//     // submit(event) {
+//     //   this.count ++;
+//     // }
+//     // increment() {
+//     //   this.count ++;
+//     // },
+
+//     // decrement() {
+//     //   this.count --;
+//     // }
+//   },
+//   // template: `<img v-bind:[attr]="img"></img>`
+//   // template: `
+//   //   <form v-on:[evt].prevent="submit">
+//   //     <button>{{ count }}</button>
+//   //   </form>
+//   // `
+//   // template: `
+//   //   <p>Contador: {{ count }}</p>
+//   //   <button v-on:click="increment"> + </button>
+//   //   <button v-on:click="decrement"> - </button>
+//   // `
+//   // template: `
+//   //   <p> {{ message }} </p>
+//   //   <input type="text" v-model="message"/>
+//   // `
+//   template: `
+//     <p>Nombre completo: {{ fullName }}</p>
+//   `
+// }).mount('#app')
+
+createApp({
   data() {
     return {
-      firstName: 'Andres',
-      lastName: 'Gallo',
-      message: 'Hello Vue!',
-      attr: 'src',
-      img: 'https://fastly.picsum.photos/id/363/200/300.jpg?hmac=LvonEMeE2QnwxULuBZW5xHtdjkz844GnAPpEhDwGvMY',
-      count: 0,
-      evt: 'submit'
-    }
-  },
-  computed: {
-    fullName() {
-      return `${this.firstName} ${this.lastName}`
+      message: 'Puerta cerrada',
+      open: true,
+      styles: {
+        backgroundColor: '#eca1a6'
+      }
     }
   },
   watch: {
-    message(newValue, oldValue) {
-      console.log('Watcher activado', newValue, oldValue)
+    open(newValue) {
+      if (newValue) {
+        this.message = 'Puerta cerrada';
+        this.styles.backgroundColor = '#eca1a6';
+      } else {
+        this.message = 'Puerta abierta';
+        this.styles.backgroundColor = '#b5e7a0';
+      }
     }
   },
-  methods: {
-    // submit(event) {
-    //   this.count ++;
-    // }
-    // increment() {
-    //   this.count ++;
-    // },
-
-    // decrement() {
-    //   this.count --;
-    // }
+  computed: {
+    label() {
+      return this.open ? 'Abrir' : 'Cerrar';
+    }
   },
-  // template: `<img v-bind:[attr]="img"></img>`
-  // template: `
-  //   <form v-on:[evt].prevent="submit">
-  //     <button>{{ count }}</button>
-  //   </form>
-  // `
-  // template: `
-  //   <p>Contador: {{ count }}</p>
-  //   <button v-on:click="increment"> + </button>
-  //   <button v-on:click="decrement"> - </button>
-  // `
-  // template: `
-  //   <p> {{ message }} </p>
-  //   <input type="text" v-model="message"/>
-  // `
   template: `
-    <p>Nombre completo: {{ fullName }}</p>
+    <div class="container" :style="styles">
+      <h2>{{ message }}</h2>
+      <button @click="open = !open">{{ label }}</button>
+    </div>
   `
-}).mount('#app')
+}).mount('#door')
