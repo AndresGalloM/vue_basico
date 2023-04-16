@@ -58,30 +58,24 @@ createApp({
   data() {
     return {
       message: 'Puerta cerrada',
-      open: true,
-      styles: {
-        backgroundColor: '#eca1a6'
-      }
+      open: true
     }
   },
   watch: {
     open(newValue) {
-      if (newValue) {
-        this.message = 'Puerta cerrada';
-        this.styles.backgroundColor = '#eca1a6';
-      } else {
-        this.message = 'Puerta abierta';
-        this.styles.backgroundColor = '#b5e7a0';
-      }
+      newValue ? this.message = 'Puerta cerrada' : this.message = 'Puerta abierta';
     }
   },
   computed: {
     label() {
       return this.open ? 'Abrir' : 'Cerrar';
+    },
+    styles() {
+      return this.open ? 'open' : 'closed';
     }
   },
   template: `
-    <div class="container" :style="styles">
+    <div class="container" :class="styles">
       <h2>{{ message }}</h2>
       <button @click="open = !open">{{ label }}</button>
     </div>
