@@ -1,6 +1,6 @@
 const { createApp } = Vue
 
-createApp({
+const vm = createApp({
   data() {
     return {
       firstName: 'Andres',
@@ -15,6 +15,11 @@ createApp({
   computed: {
     fullName() {
       return `${this.firstName} ${this.lastName}`
+    }
+  },
+  watch: {
+    message(newValue, oldValue) {
+      console.log('Watcher activado', newValue, oldValue)
     }
   },
   methods: {
