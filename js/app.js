@@ -54,7 +54,7 @@ const { createApp } = Vue
 //   `
 // }).mount('#app')
 
-const vm = createApp({
+const app = createApp({
   data() {
     return {
       username: '',
@@ -109,11 +109,11 @@ const vm = createApp({
       <div v-if="open">
         <p>Hola, {{ username }}</p>
         <div class="list">
-          <div v-for="(item, i) in posts" :key="i" class="item">
-            <div class="title">{{ item.title }}</div>
-            <p>{{ item.description }}</p>
-            <button class="delete" @click="deletePost(i)">Eliminar</button>
-          </div>
+          <item 
+            v-for="(item, i) in posts" 
+            :key="i"
+            :post="item"
+          >
         </div>
       </div>
       <div v-else>
@@ -126,4 +126,17 @@ const vm = createApp({
       </button>
     </div>
   `
-}).mount('#door')
+})
+
+app.component('item', {
+  props: ['post'],
+  template: `
+  <div class="item">
+    <div class="title">{{ post.title }}</div>
+    <p>{{ post.description }}</p>
+    <button class="delete">Eliminar</button>
+  </div>
+  `
+})
+
+const vm = app.mount('#door');
