@@ -23,11 +23,18 @@ const app = createApp({
             ]
         }
     },
+    methods: {
+        remove(email) { 
+            this.infoPersonas = this.infoPersonas.filter(persona => persona.email !== email);
+            // this.infoPersonas = resulta
+        }
+    },
     template: `
     <div style="display:flex; flex-direction: column; gap:10px;">
         <v-card-user 
             v-for="persona in infoPersonas"
             :user="persona"
+            @remove="remove(persona.email)"
         >
         </v-card-user>
     </div>
@@ -38,7 +45,7 @@ app.component('v-card-user', {
     props: ['user'],
     methods: {
         remove() {
-            console.log('holaa')
+            this.$emit('remove')
         }
     },
     template: `
