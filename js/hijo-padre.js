@@ -26,7 +26,6 @@ const app = createApp({
     methods: {
         remove(email) { 
             this.infoPersonas = this.infoPersonas.filter(persona => persona.email !== email);
-            // this.infoPersonas = resulta
         }
     },
     template: `
